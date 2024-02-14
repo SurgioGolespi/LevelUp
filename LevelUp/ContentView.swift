@@ -5,10 +5,15 @@
 //  Created by Suraj Gajula on 2/5/24.
 //
 import SwiftUI
-var items = ["Hello World","Variables", "Math", "Functions", "For Loops", "While Loops", "Conditionals", "Arrays", "Methods", "Classes"]
-var completed = 0
-var itemscompleted = [false, false, false, false, false, false, false, false, false, false]
 struct ContentView: View{
+    @AppStorage("completed") var completed = 0
+    var items = ["Hello World","Variables", "Math", "Functions", "For Loops", "While Loops", "Conditionals", "Arrays", "Methods", "Classes"]
+    @State var itemscompleted: [Int]
+    init(){
+        if let savedArray = UserDefaults.standard.array(forKey: "itemscompleted") as? [Int]{
+            self._itemscompleted = State(initialValue: savedArray)}
+        else{
+            self._itemscompleted = State(initialValue: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0])}}
     var body: some View{
         ZStack{
             Color.black.edgesIgnoringSafeArea(.all)
@@ -42,8 +47,9 @@ struct ContentView: View{
                     ForEach(items.indices, id: \.self) { index in
                         Button(action: {
                             print("\(items[index]) Tapped")
-                            if itemscompleted[index] == false{
-                                itemscompleted[index] = true
+                            if itemscompleted[index] == 0{
+                                itemscompleted[index] = 1
+                                UserDefaults.standard.set(itemscompleted, forKey: "itemscompleted")
                                 completed += 1}}){
                                 Text(items[index])
                                     .foregroundColor(.black)
