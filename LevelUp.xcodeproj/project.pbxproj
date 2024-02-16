@@ -12,7 +12,6 @@
 		5734ECE72B7207A60028F1A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5734ECE62B7207A60028F1A8 /* Assets.xcassets */; };
 		5734ECEB2B7207A60028F1A8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5734ECEA2B7207A60028F1A8 /* Preview Assets.xcassets */; };
 		578B2DEF2B7C9AE5006C7672 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B2DEE2B7C9AE5006C7672 /* ItemView.swift */; };
-		578B2DF12B7DF447006C7672 /* LevelUp in Resources */ = {isa = PBXBuildFile; fileRef = 578B2DF02B7DF447006C7672 /* LevelUp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +41,6 @@
 		5734ECF02B7207A70028F1A8 /* LevelUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LevelUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5734ECFA2B7207A70028F1A8 /* LevelUpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LevelUpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		578B2DEE2B7C9AE5006C7672 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
-		578B2DF02B7DF447006C7672 /* LevelUp */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LevelUp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +92,6 @@
 				5734ECE22B7207A60028F1A8 /* LevelUpApp.swift */,
 				5734ECE42B7207A60028F1A8 /* ContentView.swift */,
 				578B2DEE2B7C9AE5006C7672 /* ItemView.swift */,
-				578B2DF02B7DF447006C7672 /* LevelUp */,
 				5734ECE62B7207A60028F1A8 /* Assets.xcassets */,
 				5734ECE82B7207A60028F1A8 /* LevelUp.entitlements */,
 				5734ECE92B7207A60028F1A8 /* Preview Content */,
@@ -214,7 +211,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				578B2DF12B7DF447006C7672 /* LevelUp in Resources */,
 				5734ECEB2B7207A60028F1A8 /* Preview Assets.xcassets in Resources */,
 				5734ECE72B7207A60028F1A8 /* Assets.xcassets in Resources */,
 			);
