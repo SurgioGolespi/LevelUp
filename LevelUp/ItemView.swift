@@ -22,27 +22,35 @@ let descriptionmatrix: [[String]] = [
     ["Requires: Print, Variables, Operations, Functions"]]
 struct ItemView: View{
     var body: some View{
-        NavigationView{
-            ZStack{
-                Color.black.edgesIgnoringSafeArea(.all)
-                Text(title)
-                    .frame(width: 300, height: 100)
+        ZStack{
+            Color.black.edgesIgnoringSafeArea(.all)
+            Text(title)
+                .frame(width: 300, height: 100)
+                .background(Color.white)
+                .cornerRadius(20)
+                .font(.system(size: 25))
+                .offset(y : -300)
+            Text(program)
+                .frame(width: 300, height : 250)
+                .background(Color.white)
+                .cornerRadius(20)
+                .font(.system(size: 20))
+                .offset(y : -100)
+            Text(description)
+                .frame(width: 300, height : 250)
+                .background(Color.white)
+                .cornerRadius(20)
+                .font(.system(size: 20))
+                .offset(y : 175)
+                .padding()
+            Button(action:{
+                ContentView().MarkAsCompleted()}){
+                Text("Mark as Completed")
+                    .foregroundColor(.black)
+                    .frame(width: 250, height: 50)
                     .background(Color.white)
-                    .cornerRadius(20)
-                    .font(.system(size: 25))
-                    .offset(y : -300)
-                Text(program)
-                    .frame(width: 300, height : 300)
-                    .background(Color.white)
-                    .cornerRadius(20)
-                    .font(.system(size: 20))
-                    .offset(y : -75)
-                Text(description)
-                    .frame(width: 300, height : 250)
-                    .background(Color.white)
-                    .cornerRadius(20)
-                    .font(.system(size: 20))
-                    .offset(y : 225)}}}}
+                .cornerRadius(20)}
+            .offset(y: 350)}}}
 struct ItemView_Previews: PreviewProvider{
     static var previews: some View{
         ItemView()}}

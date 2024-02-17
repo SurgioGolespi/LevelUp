@@ -5,21 +5,45 @@
 //  Created by Suraj Gajula on 2/5/24.
 //
 import SwiftUI
-struct ContentView: View{
+public struct ContentView: View{
     @AppStorage("skillscompleted") var skillscompleted = 0
     @AppStorage("projectscompleted") var projectscompleted = 0
+    @AppStorage("doneindex") var doneindex = 0
+    @AppStorage("changeindex") var changeindex = 0
+    @State var items: [String]
+    @State var isActive: Int? = nil
     var skills = ["Print","Variables", "Operations", "Functions"]
     var projects = ["Calculator"]
-    @State var items: [String]
-    @State var skillsarray: [Int]
-    @State var isActive: Int? = nil
-    @State var programindex = 0
-    @State var descriptionindex = 0
+    var skillsarray: [Int]{
+        get{
+            return UserDefaults.standard.array(forKey: "skillsarray") as? [Int] ?? [0, 0, 0, 0]}
+        set{
+            UserDefaults.standard.set(newValue, forKey: "skillsarray")}}
+    var projectsarray: [Int]{
+        get{
+            return UserDefaults.standard.array(forKey: "projectsarray") as? [Int] ?? [0]}
+        set{
+            UserDefaults.standard.set(newValue, forKey: "projectsarray")}}
     init(){
-        let savedskills = UserDefaults.standard.array(forKey: "skillsarray") as? [Int] ?? [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        _skillsarray = State(initialValue: savedskills)
         _items = State(initialValue: skills)}
-    var body: some View{
+    func MarkAsCompleted(){
+        if changeindex == 0{
+            if skillsarray[doneindex] != 1{
+                skilldone(at: doneindex, to: 1)
+                skillscompleted += 1}}
+        if changeindex == 1{
+            if projectsarray[doneindex] != 1{
+                projectdone(at: doneindex, to: 1)
+                projectscompleted += 1}}}
+    func skilldone(at index: Int, to value: Int) {
+        var newarray = skillsarray
+        newarray[index] = value
+        UserDefaults.standard.set(newarray, forKey:  "skillsarray")}
+    func projectdone(at index: Int, to value: Int) {
+        var newarray = projectsarray
+        newarray[index] = value
+        UserDefaults.standard.set(newarray, forKey:  "projectsarray")}
+    public var body: some View{
         NavigationStack{
             ZStack{
                 Color.black.edgesIgnoringSafeArea(.all)
@@ -38,18 +62,16 @@ struct ContentView: View{
                     .font(.system(size: 20))
                 Button(action: {
                     items = skills
-                    programindex = 0
-                    descriptionindex = 0}){
+                    changeindex = 0}){
                     Text("Skills")
                         .frame(width: 125, height: 40)
                         .foregroundColor(.black)
                         .background(Color.white)
                         .cornerRadius(10)}
                 .offset(x: -85, y: -100)
-                Button(action: {
+                Button(action:{
                     items = projects
-                    programindex = 1
-                    descriptionindex = 1}){
+                    changeindex = 1}){
                     Text("Projects")
                         .frame(width: 125, height: 40)
                         .foregroundColor(.black)
@@ -59,11 +81,12 @@ struct ContentView: View{
                 ScrollView(.vertical, showsIndicators: false){
                     VStack {
                         ForEach(items.indices, id: \.self) { index in
-                            Button(action: {
+                            Button(action:{
                                 isActive = 1
+                                doneindex = index
                                 title = items[index]
-                                program = programmatrix[programindex][index]
-                                description = descriptionmatrix[descriptionindex][index]}){
+                                program = programmatrix[changeindex][index]
+                                description = descriptionmatrix[changeindex][index]}){
                                 Text(items[index])
                                     .foregroundColor(.black)
                                     .frame(width: 300, height: 50)
@@ -71,7 +94,6 @@ struct ContentView: View{
                                     .cornerRadius(10)}}}}
             .offset(y: 325)
             .padding(.bottom, 300)
-            Spacer()
             NavigationLink("", destination: ItemView(), tag: 1, selection: $isActive)}}}}
 struct ContentView_Previews: PreviewProvider{
     static var previews: some View{

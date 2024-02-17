@@ -90,8 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				5734ECE22B7207A60028F1A8 /* LevelUpApp.swift */,
-				5734ECE42B7207A60028F1A8 /* ContentView.swift */,
 				578B2DEE2B7C9AE5006C7672 /* ItemView.swift */,
+				5734ECE42B7207A60028F1A8 /* ContentView.swift */,
 				5734ECE62B7207A60028F1A8 /* Assets.xcassets */,
 				5734ECE82B7207A60028F1A8 /* LevelUp.entitlements */,
 				5734ECE92B7207A60028F1A8 /* Preview Content */,
