@@ -12,17 +12,17 @@ public struct ContentView: View{
     @AppStorage("doneindex") var doneindex = 0
     @AppStorage("changeindex") var changeindex = 0
     @State var items: [String]
-    @State var navactive: Int? = nil
-    var skills = ["Print","Variables", "Operations", "Functions"]
-    var projects = ["Calculator"]
+    @State var navactive = false
+    var skills = ["Outputs","Variables", "Operations", "Functions", "Views", "Inputs", "Buttons"]
+    var projects = ["Calculator App Part 1", "Calculator App Part 2"]
     var skillsarray: [Int]{
         get{
-            return UserDefaults.standard.array(forKey: "skillsarray") as? [Int] ?? [0, 0, 0, 0]}
+            return UserDefaults.standard.array(forKey: "skillsarray") as? [Int] ?? [0, 0, 0, 0, 0, 0, 0]}
         set{
             UserDefaults.standard.set(newValue, forKey: "skillsarray")}}
     var projectsarray: [Int]{
         get{
-            return UserDefaults.standard.array(forKey: "projectsarray") as? [Int] ?? [0]}
+            return UserDefaults.standard.array(forKey: "projectsarray") as? [Int] ?? [0, 0]}
         set{
             UserDefaults.standard.set(newValue, forKey: "projectsarray")}}
     init(){
@@ -45,52 +45,57 @@ public struct ContentView: View{
         newarray[index] = value
         UserDefaults.standard.set(newarray, forKey:  "projectsarray")}
     func requestNotificationAuthorization() {
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
-                if granted {
-                    print("Notification authorization granted.")
-                } else {
-                    print("Notification authorization denied.")
-                }
-            }
-        }
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]){ granted, error in
+            if granted{
+                print("Notification authorization granted.")}
+            else{
+                print("Notification authorization denied.")}}}
     public var body: some View{
-        NavigationStack{
+        NavigationView{
             ZStack{
                 Color.black.edgesIgnoringSafeArea(.all)
                 Text("Profile")
-                    .offset(y: -50)
+                    .offset(y: -60)
                     .frame(width: 300, height: 200)
                     .background(Color.white)
                     .cornerRadius(10)
-                    .font(.system(size: 25))
+                    .font(.system(size: 30))
                     .offset(y: -250)
-                    .onAppear {
-                        requestNotificationAuthorization()
-                    }
+                    .onAppear{
+                        requestNotificationAuthorization()}
                 Text("Skills: \(skillscompleted)/\(skills.count)")
                     .offset(x: -90, y: -250)
                     .font(.system(size: 20))
                 Text("Projects: \(projectscompleted)/\(projects.count)")
-                    .offset(x: -80, y: -200)
+                    .offset(x: -84, y: -200)
                     .font(.system(size: 20))
-                Button(action: {
+                ProgressView(value: Float(skillscompleted)/Float(skills.count))
+                    .offset(x: 84, y: -250)
+                    .frame(width: 100)
+                    .accentColor(.black)
+                ProgressView(value: Float(projectscompleted)/Float(projects.count))
+                    .offset(x: 84, y: -200)
+                    .frame(width: 100)
+                    .accentColor(.black)
+                Button(action:{
                     if(changeindex == 1){
                         items = skills
                         changeindex = 0}
                     else if changeindex == 0{
                         items = projects
                         changeindex = 1}}){
-                        Text((changeindex != 0) ? "Projects" : "Skills")
-                            .frame(width: 300, height: 50)
-                            .foregroundColor(.black)
-                            .background(Color.white)
-                        .cornerRadius(10)}
-                    .offset(y: -100)
+                            Text((changeindex == 0) ? "Skills" : "Projects")
+                                .frame(width: 300, height: 75)
+                                .foregroundColor(.black)
+                                .background(Color.white)
+                                .font(.system(size: 25))
+                            .cornerRadius(10)}
+                        .offset(y: -100)
                 ScrollView(.vertical, showsIndicators: false){
                     VStack {
                         ForEach(items.indices, id: \.self) { index in
                             Button(action:{
-                                navactive = 1
+                                navactive = true
                                 doneindex = index
                                 ItemView().title = items[index]
                                 ItemView().program = programmatrix[changeindex][index]
@@ -100,9 +105,10 @@ public struct ContentView: View{
                                         .frame(width: 300, height: 50)
                                         .background(Color.white)
                                     .cornerRadius(10)}}}}
-                .offset(y: 350)
+                .offset(y: 325)
                 .padding(.bottom, 300)
-                NavigationLink("", destination: ItemView(), tag: 1, selection: $navactive)}}}}
+                NavigationLink(destination: ItemView(), isActive: $navactive){
+                    EmptyView()}}}}}
 struct ContentView_Previews: PreviewProvider{
     static var previews: some View{
         ContentView()}}
