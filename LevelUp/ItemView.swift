@@ -36,15 +36,15 @@ var programmatrix: [[String]] = [
     """
     import SwiftUI
     struct ContentView: View {
-         var body: some View {
-             Text("Hello, World!")
-         }
+        var body: some View {
+            Text("Hello, World!")
+        }
     }
 
     struct ContentView_Previews: PreviewProvider {
-         static var previews: some View {
-             ContentView()
-         }
+        static var previews: some View {
+            ContentView()
+        }
     }
     """,
     """
@@ -55,12 +55,13 @@ var programmatrix: [[String]] = [
     """,
     """
     Button(action: {
-            print("Button pressed.")}) {
-            Text("Press Button")
-    }
+        print("Button pressed.")
+        }) {
+        Text("Press Button")
+        }
     """],
-    ["Create a calculator app using functions for each of the four operations in the operations skill. The calculator should print out the result of any performed operation.",
-    "Create a calculator app using interactive views and the functions from Part 1 so users can compute numbers of their choosing."]]
+    ["Requires: Print, Variables, Operations, Functions",
+     "Requires: Caculator App Part 1, Views, Inputs, Buttons"]]
 var descriptionmatrix: [[String]] = [
     ["You can use outputs through print statements that print the text stored within the quotation marks.",
     "You can use variables to hold values that can be modified when a program is run. Each variable has a data type that dictates how it can be used, such as an Int for numerical data or a String for textual data.",
@@ -69,8 +70,8 @@ var descriptionmatrix: [[String]] = [
     "You can use views to display information to the user of your app. Views can contain many types of UI elements, such as the Text element.",
     "You can use inputs to allow users to control your app. One way to input data is by using the TextField UI element within a view to store the input in variables.",
     "You can use buttons to run code whenever they are touched. Buttons are used within views and ca contain other elements like text."],
-    ["Requires: Print, Variables, Operations, Functions",
-    "Requires: Caculator App Part 1, Views, Inputs, Buttons"]]
+    ["Create a calculator app using functions for each of the four operations in the operations skill. The calculator should print out the result of any performed operation.",
+     "Create a calculator app using interactive views and the functions from Part 1 so users can compute numbers of their choosing."]]
 struct ItemView: View{
     @AppStorage("title") var title: String = "Title"
     @AppStorage("program") var program: String = "Program"
@@ -79,6 +80,7 @@ struct ItemView: View{
     @State var timeractive = false
     @State var timer: Timer?
     @State var backgroundTaskIdentifier: UIBackgroundTaskIdentifier = .invalid
+    @Binding var itemactive: Bool
     func timestring(time: TimeInterval) -> String{
             let hours = Int(time)/3600
             let minutes = Int(time)/60 % 60
@@ -95,26 +97,38 @@ struct ItemView: View{
         ZStack{
             Color.black.edgesIgnoringSafeArea(.all)
             Text(title)
-                .frame(width: 300, height: 50)
+                .frame(width: 250, height: 50)
                 .background(Color.white)
+                .foregroundColor(.black)
                 .cornerRadius(20)
                 .font(.system(size: 25))
                 .offset(y : -350)
-            Text(program)
-                .frame(width: 250)
-                .frame(width: 300, height : 250)
-                .background(Color.white)
-                .cornerRadius(20)
-                .font(.system(size: 15))
-                .offset(y : -175)
+            ScrollView(.vertical, showsIndicators: false){
+                Text(program)
+                    .padding()
+                    .multilineTextAlignment(.leading)}
+            .frame(width: 300, height: 250)
+            .background(Color.white)
+            .foregroundColor(.black)
+            .cornerRadius(20)
+            .font(.system(size: 20))
+            .offset(y: -175)
             Text(description)
                 .frame(width: 250)
                 .frame(width: 300, height : 250)
                 .background(Color.white)
                 .cornerRadius(20)
+                .foregroundColor(.black)
                 .font(.system(size: 20))
                 .offset(y : 100)
                 .padding()
+            Button(action: {
+                itemactive = false}){
+                    Text("Back")
+                        .frame(width: 50, height: 50)
+                        .background(Color.black)
+                        .foregroundColor(.white)}
+                .offset(x: -162.5, y: -350)
             Button(action:{
                 ContentView().MarkAsCompleted()}){
                     Text("Mark as Completed")
@@ -145,4 +159,4 @@ struct ItemView: View{
                 .offset(y: 350)}}}
 struct ItemView_Previews: PreviewProvider{
     static var previews: some View{
-        ItemView()}}
+        ItemView(itemactive: .constant(true))}}
