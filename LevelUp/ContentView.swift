@@ -14,6 +14,8 @@ public struct ContentView: View{
     @State var items: [String] = [""]
     @State var itemactive = false
     @State var additemactive = false
+    @AppStorage("addedskills") var addedskills = 0
+    @AppStorage("addedprojects") var addedprojects = 0
     var skills: [String]{
         get{
             return UserDefaults.standard.array(forKey: "skills") as? [String] ?? ["Outputs","Variables", "Operations", "Functions", "Views", "Inputs", "Buttons"]}
@@ -65,7 +67,31 @@ public struct ContentView: View{
         var newarray = Array(repeating: 0, count: skillsarray.count)
         UserDefaults.standard.set(newarray, forKey:  "skillsarray")
         newarray = Array(repeating: 0, count: projectsarray.count)
-        UserDefaults.standard.set(newarray, forKey:  "projectsarray")}
+        UserDefaults.standard.set(newarray, forKey:  "projectsarray")
+        if addedskills > 0{
+            for _ in 0..<addedskills{
+                var newskills = skills
+                newskills.removeLast()
+                UserDefaults.standard.set(newskills, forKey:  "skills")
+                var newprogram = ItemView(itemactive: $itemactive).programmatrix
+                newprogram[0].removeLast()
+                UserDefaults.standard.set(newprogram, forKey:  "programmatrix")
+                var newdescription = ItemView(itemactive: $itemactive).descriptionmatrix
+                newdescription[0].removeLast()
+                UserDefaults.standard.set(newdescription, forKey:  "descriptionmatrix")}
+            addedskills = 0}
+        if addedprojects > 0{
+            for _ in 0..<addedprojects{
+                var newprojects = projects
+                newprojects.removeLast()
+                UserDefaults.standard.set(newprojects, forKey:  "projects")
+                var newprogram = ItemView(itemactive: $itemactive).programmatrix
+                newprogram[1].removeLast()
+                UserDefaults.standard.set(newprogram, forKey:  "programmatrix")
+                var newdescription = ItemView(itemactive: $itemactive).descriptionmatrix
+                newdescription[1].removeLast()
+                UserDefaults.standard.set(newdescription, forKey:  "descriptionmatrix")}
+            addedprojects = 0}}
     func itemtext(index: Int) -> String{
         if changeindex == 0 {
             return skillsarray.indices.contains(index) && skillsarray[index] == 1 ?
@@ -144,8 +170,8 @@ public struct ContentView: View{
                                 itemactive = true
                                 doneindex = index
                                 ItemView(itemactive: $itemactive).title = items[index]
-                                ItemView(itemactive: $itemactive).program = programmatrix[changeindex][index]
-                                ItemView(itemactive: $itemactive).description = descriptionmatrix[changeindex][index]}){
+                                ItemView(itemactive: $itemactive).program = ItemView(itemactive: $itemactive).programmatrix[changeindex][index]
+                                ItemView(itemactive: $itemactive).description = ItemView(itemactive: $itemactive).descriptionmatrix[changeindex][index]}){
                                     Text(itemtext(index: index))
                                         .foregroundColor(.black)
                                         .frame(width: 300, height: 50)

@@ -10,13 +10,14 @@ public struct LaunchView: View{
     let slides = ["Welcome to LevelUp.",
                   "Track your learning.",
                   "Plan study sessions.",
+                  "Make your own modules.",
                   "Save time and money."]
     public var body: some View{
         ZStack{
             TabView{
                 ForEach(slides, id: \.self){ slide in
                     Text(slide)
-                        .frame(width: 300)
+                        .frame(width: 325)
                         .font(.system(size: 30))
                     .foregroundColor(.white)}}
             .background(Color.black)

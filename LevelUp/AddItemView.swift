@@ -34,20 +34,23 @@ struct AddItemView: View{
             Button(action: {
                 additemactive = false}){
                     Text("Back")
-                        .frame(width: 50, height: 50)
-                        .background(Color.black)
                     .foregroundColor(.white)}
                 .offset(x: -162.5, y: -350)
             Button(action: {
-                additemactive = false
                 var newskillsarray = ContentView().skillsarray
                 newskillsarray.append(0)
                 UserDefaults.standard.set(newskillsarray, forKey:  "skillsarray")
                 var newskills = ContentView().skills
                 newskills.append(titleinput)
                 UserDefaults.standard.set(newskills, forKey:  "skills")
-                programmatrix[0].append(programinput)
-                descriptionmatrix[0].append(descriptioninput)}){
+                var newprogram = ItemView(itemactive: .constant(false)).programmatrix
+                newprogram[0].append(programinput)
+                UserDefaults.standard.set(newprogram, forKey:  "programmatrix")
+                var newdescription = ItemView(itemactive: .constant(false)).descriptionmatrix
+                newdescription[0].append(descriptioninput)
+                UserDefaults.standard.set(newdescription, forKey:  "descriptionmatrix")
+                additemactive = false
+                ContentView().addedskills += 1}){
                     Text("Save As Skill")
                         .frame(width: 137.5, height: 100)
                         .background(Color.white)
@@ -55,15 +58,20 @@ struct AddItemView: View{
                     .cornerRadius(10)}
                 .offset(x: -82.5,y: 300)
             Button(action: {
-                additemactive = false
                 var newprojectsarray = ContentView().projectsarray
                 newprojectsarray.append(0)
                 UserDefaults.standard.set(newprojectsarray, forKey:  "projectsarray")
                 var newprojects = ContentView().projects
                 newprojects.append(titleinput)
                 UserDefaults.standard.set(newprojects, forKey:  "projects")
-                programmatrix[1].append(programinput)
-                descriptionmatrix[1].append(descriptioninput)}){
+                var newprogram = ItemView(itemactive: .constant(false)).programmatrix
+                newprogram[1].append(programinput)
+                UserDefaults.standard.set(newprogram, forKey:  "programmatrix")
+                var newdescription = ItemView(itemactive: .constant(false)).descriptionmatrix
+                newdescription[1].append(descriptioninput)
+                UserDefaults.standard.set(newdescription, forKey:  "descriptionmatrix")
+                additemactive = false
+                ContentView().addedprojects += 1}){
                     Text("Save As Project")
                         .frame(width: 137.5, height: 100)
                         .background(Color.white)

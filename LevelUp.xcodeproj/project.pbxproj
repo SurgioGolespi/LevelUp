@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5734ECE72B7207A60028F1A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5734ECE62B7207A60028F1A8 /* Assets.xcassets */; };
-		5734ECEB2B7207A60028F1A8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5734ECEA2B7207A60028F1A8 /* Preview Assets.xcassets */; };
 		57D119A92B89B08400ACA93D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D119A82B89B08400ACA93D /* ContentView.swift */; };
 		57D119AB2B89B0A600ACA93D /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D119AA2B89B0A600ACA93D /* LaunchView.swift */; };
 		57D119AD2B89B0C800ACA93D /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D119AC2B89B0C800ACA93D /* ItemView.swift */; };
@@ -37,7 +36,6 @@
 		5734ECDF2B7207A60028F1A8 /* LevelUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LevelUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5734ECE62B7207A60028F1A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5734ECE82B7207A60028F1A8 /* LevelUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LevelUp.entitlements; sourceTree = "<group>"; };
-		5734ECEA2B7207A60028F1A8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5734ECF02B7207A70028F1A8 /* LevelUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LevelUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5734ECFA2B7207A70028F1A8 /* LevelUpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LevelUpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		57D119A82B89B08400ACA93D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -100,17 +98,8 @@
 				57D119A82B89B08400ACA93D /* ContentView.swift */,
 				5734ECE62B7207A60028F1A8 /* Assets.xcassets */,
 				5734ECE82B7207A60028F1A8 /* LevelUp.entitlements */,
-				5734ECE92B7207A60028F1A8 /* Preview Content */,
 			);
 			path = LevelUp;
-			sourceTree = "<group>";
-		};
-		5734ECE92B7207A60028F1A8 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				5734ECEA2B7207A60028F1A8 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,7 +206,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5734ECEB2B7207A60028F1A8 /* Preview Assets.xcassets in Resources */,
 				5734ECE72B7207A60028F1A8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

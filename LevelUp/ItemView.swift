@@ -6,8 +6,11 @@
 //
 import SwiftUI
 import UserNotifications
-var programmatrix: [[String]] = [
-    ["print(\"Hello World\")",
+struct ItemView: View{
+    var programmatrix: [[String]]{
+        get{
+            return UserDefaults.standard.array(forKey: "programmatrix") as? [[String]] ??
+    [["print(\"Hello World\")",
     """
     var x = 5
     var y = \"Five\"
@@ -40,7 +43,7 @@ var programmatrix: [[String]] = [
             Text("Hello, World!")
         }
     }
-
+    
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
             ContentView()
@@ -61,18 +64,23 @@ var programmatrix: [[String]] = [
         }
     """],
     ["Requires: Print, Variables, Operations, Functions",
-     "Requires: Caculator App Part 1, Views, Inputs, Buttons"]]
-var descriptionmatrix: [[String]] = [
-    ["You can use outputs through print statements that print the text stored within the quotation marks.",
-    "You can use variables to hold values that can be modified when a program is run. Each variable has a data type that dictates how it can be used, such as an Int for numerical data or a String for textual data.",
-    "You can use operations such to add, subtract, multiply, and divide numbers or variables that contain them. The operations are as follows: + for addition, - for subtraction, * for multiplication, and / for division.",
-    "You can use functions to reuse blocks of code that perform specific tasks. They can take input parameters, perform operations, and return a result.",
-    "You can use views to display information to the user of your app. Views can contain many types of UI elements, such as the Text element.",
-    "You can use inputs to allow users to control your app. One way to input data is by using the TextField UI element within a view to store the input in variables.",
-    "You can use buttons to run code whenever they are touched. Buttons are used within views and ca contain other elements like text."],
-    ["Create a calculator app using functions for each of the four operations in the operations skill. The calculator should print out the result of any performed operation.",
-     "Create a calculator app using interactive views and the functions from Part 1 so users can compute numbers of their choosing."]]
-struct ItemView: View{
+    "Requires: Caculator App Part 1, Views, Inputs, Buttons"]]}
+        set{
+            UserDefaults.standard.set(newValue, forKey: "programmatrix")}}
+    var descriptionmatrix: [[String]]{
+        get{
+            return UserDefaults.standard.array(forKey: "descriptionmatrix") as? [[String]] ??
+            [["You can use outputs through print statements that print the text stored within the quotation marks.",
+              "You can use variables to hold values that can be modified when a program is run. Each variable has a data type that dictates how it can be used, such as an Int for numerical data or a String for textual data.",
+              "You can use operations such to add, subtract, multiply, and divide numbers or variables that contain them. The operations are as follows: + for addition, - for subtraction, * for multiplication, and / for division.",
+              "You can use functions to reuse blocks of code that perform specific tasks. They can take input parameters, perform operations, and return a result.",
+              "You can use views to display information to the user of your app. Views can contain many types of UI elements, such as the Text element.",
+              "You can use inputs to allow users to control your app. One way to input data is by using the TextField UI element within a view to store the input in variables.",
+              "You can use buttons to run code whenever they are touched. Buttons are used within views and ca contain other elements like text."],
+             ["Create a calculator app using functions for each of the four operations in the operations skill. The calculator should print out the result of any performed operation.",
+              "Create a calculator app using interactive views and the functions from Part 1 so users can compute numbers of their choosing."]]}
+        set{
+            UserDefaults.standard.set(newValue, forKey: "descriptionmatrix")}}
     @AppStorage("title") var title: String = "Title"
     @AppStorage("program") var program: String = "Program"
     @AppStorage("description") var description: String = "Description"
@@ -125,8 +133,6 @@ struct ItemView: View{
             Button(action: {
                 itemactive = false}){
                     Text("Back")
-                        .frame(width: 50, height: 50)
-                        .background(Color.black)
                         .foregroundColor(.white)}
                 .offset(x: -162.5, y: -350)
             Button(action:{
